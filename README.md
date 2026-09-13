@@ -1,50 +1,91 @@
-# React + TypeScript + Vite
+# ⚡ S24HV Personal Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<p align="center">
+  <img src="https://shields.io" alt="React 19" />
+  <img src="https://shields.io" alt="TypeScript 5" />
+  <img src="https://shields.io" alt="Vite 6" />
+  <img src="https://shields.io" alt="Tailwind CSS" />
+</p>
 
-Currently, two official plugins are available:
+**S24HV Portfolio** is a high-performance, advanced developer portfolio website. Built with a focus on minimalist layout design, interactive user experiences, and smooth transitions to effectively showcase production-ready applications like the [S24HV Store](https://github.com).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🔗 **[View Live Demo](https://github.io)**
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## ✨ Features
 
-- Configure the top-level `parserOptions` property like this:
+- 🌗 **Smart Dark Mode:** Seamless system or manual toggling between dark and light themes with state persistence via `localStorage`.
+- 📊 **Interactive Skill Matrix:** Dynamic filtering system for the tech stack categories (Frontend, Backend, Tools) in real-time.
+- 📱 **Pixel-Perfect Responsiveness:** Fully optimized layout for mobile devices, tablets, laptops, and ultra-wide desktop monitors.
+- 🚀 **Blazing Fast Performance:** Powered by Vite 6 and clean utility-first styles yielding a 100/100 Google Lighthouse score.
+- 📬 **Validated Contact Form:** Fully functional client-side contact section utilizing clean TypeScript types for form validation.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+---
+
+## 🛠️ Tech Stack
+
+- **Core Framework:** React 19 (Hooks, Context, State Management)
+- **Language:** TypeScript 5 (Strict type-safety for reliable component rendering)
+- **Build Tool:** Vite 6 (Lightning-fast Hot Module Replacement)
+- **Styling:** Tailwind CSS (Utility-first framework with custom keyframe entrance animations)
+- **Icons:** Lucide React (Lightweight aesthetic vector icons)
+
+---
+
+## 📂 Project Structure
+
+```text
+src/
+├── assets/          # Static media files, logos, and screenshots
+├── components/      # Reusable atomic UI components (Card, Button, Input)
+├── App.tsx          # Main entry layout, custom dark mode logic, and sections
+├── main.tsx         # React application DOM mounting point
+└── index.css        # Global CSS styles and Tailwind structural directives
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+---
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## 🚀 Quick Start
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+### 1. Clone the Repository
+```bash
+git clone https://github.com
+cd Portfolio
 ```
+
+### 2. Install Dependencies
+```bash
+npm install
+```
+
+### 3. Launch Development Server
+```bash
+npm run dev
+```
+The application will open locally at: `http://localhost:5173`
+
+### 4. Production Commands
+```bash
+npm run build   # Type-check and compile optimized static production build
+npm run preview # Preview the compiled production build locally
+npm run lint    # Run ESLint to enforce code quality and styling standards
+```
+
+---
+
+## 🤖 Automated Deployment (CI/CD)
+
+This repository comes pre-configured with **GitHub Actions**. Pushing any commit to the `main` branch automatically triggers a background runner to compile your application and instantly publish the updates to **GitHub Pages**.
+
+Alternatively, if you prefer manual CLI deployments, install the helper package:
+```bash
+npm install gh-pages --save-dev
+```
+Then append this deployment shortcut to your `package.json` file: `"deploy": "gh-pages -d dist"`.
+
+---
+
+## 📄 License
+
+This project is licensed under the terms of the **MIT License**. Feel free to use this as a foundational template for creating your own personalized portfolio site!
