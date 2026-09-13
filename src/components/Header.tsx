@@ -13,7 +13,7 @@ const Header = () => {
 
   return (
     <div className={`header-container ${theme}`}>
-      <h1 className="header-title">N-EXIT</h1>
+      <h1 className="header-title">S24HV</h1>
       <button
         className="change-theme-toggle"
         onClick={toggle}>

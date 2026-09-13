@@ -1,0 +1,66 @@
+.boot-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #05070d;
+  transition: opacity 0.6s ease;
+
+  &.fade-out {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+.boot-screen-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  font-family: "JetBrains Mono", monospace;
+}
+
+.boot-line {
+  color: #38bdf8;
+  font-size: 1.3rem;
+  letter-spacing: 2px;
+  text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+  animation: bootFade 0.4s ease;
+  text-align: center;
+  padding: 0 20px;
+}
+
+@keyframes bootFade {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.boot-bar {
+  width: 220px;
+  height: 3px;
+  border-radius: 3px;
+  background: rgba(56, 189, 248, 0.15);
+  overflow: hidden;
+}
+
+.boot-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: #38bdf8;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
+  animation: bootProgress 2.2s ease forwards;
+}
+
+@keyframes bootProgress {
+  to {
+    width: 100%;
+  }
+}

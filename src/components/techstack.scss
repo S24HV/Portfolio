@@ -1,0 +1,73 @@
+.techstack-container {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 30px;
+  backdrop-filter: blur(6px);
+  margin-bottom: 40px;
+}
+
+.techstack-caption {
+  margin: 0 0 20px;
+  font-size: 15px;
+  color: var(--text-secondary);
+
+  a {
+    color: var(--accent);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.techstack-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.techstack-bar-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.techstack-bar-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.techstack-percent {
+  margin-left: auto;
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+.techstack-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  box-shadow: 0 0 8px currentColor;
+}
+
+.techstack-bar-track {
+  width: 100%;
+  height: 8px;
+  border-radius: 8px;
+  background: var(--border);
+  overflow: hidden;
+}
+
+.techstack-bar-fill {
+  height: 100%;
+  border-radius: 8px;
+  width: 0%;
+  transition: width 1s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 0 12px currentColor;
+}

@@ -1,0 +1,123 @@
+.roadmap-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 10px 0 60px;
+  margin-left: 10px;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 15px;
+    top: 10px;
+    bottom: 60px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--accent) 0%, var(--border) 70%, transparent 100%);
+  }
+}
+
+.roadmap-item {
+  position: relative;
+  display: flex;
+  gap: 24px;
+  opacity: 0;
+}
+
+.roadmap-node {
+  position: relative;
+  z-index: 1;
+  width: 32px;
+  min-width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.roadmap-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--bg-primary);
+  transition: 0.3s;
+}
+
+.roadmap-item.done .roadmap-dot {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+
+.roadmap-item.active .roadmap-dot {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-glow);
+  animation: pulse 1.8s ease-in-out infinite;
+}
+
+.roadmap-item.planned .roadmap-dot {
+  background: transparent;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 4px var(--accent-glow);
+  }
+  50% {
+    box-shadow: 0 0 0 8px transparent;
+  }
+}
+
+.roadmap-content {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 18px 22px;
+  backdrop-filter: blur(6px);
+  transition: 0.3s;
+
+  &:hover {
+    border-color: var(--accent);
+    box-shadow: 0 0 24px var(--accent-glow);
+  }
+
+  h3 {
+    margin: 6px 0 8px;
+    font-family: "Orbitron", sans-serif;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+  }
+
+  p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+}
+
+.roadmap-status {
+  display: inline-block;
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+
+  &.done {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  &.active {
+    color: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 0 10px var(--accent-glow);
+  }
+}
