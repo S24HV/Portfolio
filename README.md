@@ -89,3 +89,5 @@ Then append this deployment shortcut to your `package.json` file: `"deploy": "gh
 ## 📄 License
 
 This project is licensed under the terms of the **MIT License**. Feel free to use this as a foundational template for creating your own personalized portfolio site!
+
+
