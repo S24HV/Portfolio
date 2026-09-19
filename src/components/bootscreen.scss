@@ -1,0 +1,212 @@
+.boot-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #030812;
+  color: #ccecff;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+
+  &.fade-out {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+
+.boot-grid {
+  position: absolute;
+  inset: -30%;
+  background-image:
+    linear-gradient(rgba(56, 189, 248, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 189, 248, 0.07) 1px, transparent 1px);
+  background-size: 42px 42px;
+  transform: perspective(600px) rotateX(58deg) translateY(28%);
+  animation: bootGridMove 8s linear infinite;
+}
+
+.boot-noise {
+  position: absolute;
+  inset: 0;
+  opacity: 0.12;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0,
+    transparent 3px,
+    rgba(255, 255, 255, 0.06) 4px
+  );
+  animation: bootScan 2.4s linear infinite;
+}
+
+.boot-screen-content {
+  position: relative;
+  width: min(720px, calc(100% - 34px));
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  font-family: "JetBrains Mono", monospace;
+}
+
+.boot-brand {
+  align-self: center;
+  font-family: "Orbitron", sans-serif;
+  font-size: clamp(2.8rem, 8vw, 5rem);
+  letter-spacing: 12px;
+  color: #eaf9ff;
+  text-shadow:
+    0 0 10px #38bdf8,
+    0 0 35px rgba(56, 189, 248, 0.8),
+    0 0 80px rgba(37, 99, 235, 0.5);
+  animation: brandPulse 1.8s ease-in-out infinite;
+}
+
+.boot-terminal {
+  position: relative;
+  border: 1px solid rgba(56, 189, 248, 0.38);
+  background: rgba(2, 12, 25, 0.86);
+  box-shadow:
+    0 0 35px rgba(0, 119, 255, 0.13),
+    inset 0 0 30px rgba(56, 189, 248, 0.035);
+  clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
+}
+
+.boot-terminal::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent 0%, rgba(56, 189, 248, 0.08) 50%, transparent 100%);
+  transform: translateY(-100%);
+  animation: terminalScan 2.2s linear infinite;
+}
+
+.boot-terminal-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 11px 15px;
+  border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+  color: #4cc8ff;
+  font-size: 0.65rem;
+  letter-spacing: 1px;
+}
+
+.boot-lines {
+  min-height: 174px;
+  padding: 18px 15px;
+  box-sizing: border-box;
+
+  > div {
+    display: grid;
+    grid-template-columns: 44px 1fr 34px;
+    gap: 10px;
+    margin-bottom: 9px;
+    color: #65869f;
+    font-size: 0.72rem;
+    line-height: 1.4;
+    animation: bootLineIn 0.25s ease both;
+  }
+
+  .current {
+    color: #dff7ff;
+  }
+
+  b {
+    color: #38bdf8;
+    font-weight: 700;
+    text-align: right;
+  }
+}
+
+.boot-prefix {
+  color: #226c91;
+}
+
+.boot-progress-row {
+  display: grid;
+  grid-template-columns: 38px 1fr 42px;
+  gap: 12px;
+  align-items: center;
+  color: #5b91ad;
+  font-size: 0.64rem;
+  letter-spacing: 1px;
+}
+
+.boot-bar {
+  height: 4px;
+  overflow: hidden;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.18);
+}
+
+.boot-bar-fill {
+  height: 100%;
+  background: #38bdf8;
+  box-shadow: 0 0 16px #38bdf8;
+  transition: width 0.1s linear;
+}
+
+.boot-status {
+  align-self: center;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #38bdf8;
+  font-size: 0.64rem;
+  letter-spacing: 2px;
+}
+
+.boot-status span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 12px #38bdf8;
+  animation: statusBlink 0.8s ease-in-out infinite;
+}
+
+@keyframes bootGridMove {
+  to { transform: perspective(600px) rotateX(58deg) translateY(31%); }
+}
+
+@keyframes bootScan {
+  to { transform: translateY(10px); }
+}
+
+@keyframes terminalScan {
+  to { transform: translateY(100%); }
+}
+
+@keyframes bootLineIn {
+  from { opacity: 0; transform: translateX(-8px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes brandPulse {
+  50% { filter: brightness(1.25); }
+}
+
+@keyframes statusBlink {
+  50% { opacity: 0.35; }
+}
+
+@media (max-width: 600px) {
+  .boot-screen-content {
+    gap: 14px;
+  }
+
+  .boot-brand {
+    letter-spacing: 7px;
+  }
+
+  .boot-lines {
+    min-height: 190px;
+  }
+
+  .boot-lines > div {
+    grid-template-columns: 34px 1fr 26px;
+    font-size: 0.59rem;
+  }
+}

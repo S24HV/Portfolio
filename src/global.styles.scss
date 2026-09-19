@@ -1,29 +1,203 @@
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
-  margin-top: 150px;
-  font-family: Arial, sans-serif;
-  background: #f7f8f9;
-  color: #091e42;
-  padding: 0 5vw;
+  min-height: 100vh;
+  padding-top: 150px;
+  padding-left: 5vw;
+  padding-right: 5vw;
+  font-family: "Rajdhani", "Segoe UI", sans-serif;
+  position: relative;
+  overflow-x: hidden;
+  transition: background 0.4s ease, color 0.4s ease;
+
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  background-image: linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 48px 48px;
+  background-attachment: fixed;
+  animation: gridPan 60s linear infinite;
+
+  --bg-primary: #eef1f5;
+  --bg-secondary: #ffffff;
+  --surface: rgba(15, 23, 42, 0.03);
+  --border: rgba(59, 130, 246, 0.16);
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --accent: #2563eb;
+  --accent-secondary: #7c3aed;
+  --accent-glow: rgba(37, 99, 235, 0.25);
 
   div {
     box-sizing: border-box;
   }
 
   a {
-    color: #091e42;
+    color: var(--accent);
   }
 
   .hidden {
     display: none;
   }
+
+  &::before,
+  &::after {
+    content: "";
+    position: fixed;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    filter: blur(120px);
+    z-index: -1;
+    opacity: 0.25;
+    pointer-events: none;
+  }
+
+  &::before {
+    top: -180px;
+    left: -120px;
+    background: var(--accent);
+    animation: float 20s ease-in-out infinite;
+  }
+
+  &::after {
+    bottom: -180px;
+    right: -120px;
+    background: var(--accent-secondary);
+    animation: float 20s ease-in-out infinite;
+    animation-delay: -10s;
+  }
 }
 
 body.dark {
-  background: #161a1d;
-  color: #dee4ea;
+  --bg-primary: #0a0e17;
+  --bg-secondary: #131824;
+  --surface: rgba(148, 163, 184, 0.05);
+  --border: rgba(56, 189, 248, 0.16);
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --accent: #38bdf8;
+  --accent-secondary: #818cf8;
+  --accent-glow: rgba(56, 189, 248, 0.35);
+}
 
-  a {
-    color: #dee4ea;
+.section-title {
+  font-family: "Orbitron", sans-serif;
+  text-align: center;
+  letter-spacing: 2px;
+  color: var(--accent);
+  text-shadow: 0 0 20px var(--accent-glow);
+  margin: 60px 0 30px;
+}
+
+.fade-in {
+  animation: fadeInUp 0.8s ease both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(60px, 70px) scale(1.15);
+  }
+}
+
+@keyframes gridPan {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 480px 480px;
+  }
+}
+body::selection {
+  background: var(--accent);
+  color: var(--bg-primary);
+}
+
+.app-main {
+  position: relative;
+  isolation: isolate;
+}
+
+.app-main::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.12;
+  background:
+    linear-gradient(90deg, transparent 49.9%, var(--accent) 50%, transparent 50.1%),
+    linear-gradient(transparent 49.9%, var(--accent) 50%, transparent 50.1%);
+  background-size: 120px 120px;
+  mask-image: radial-gradient(circle at center, black, transparent 75%);
+  animation: cyberDrift 24s linear infinite;
+}
+
+.section-title {
+  position: relative;
+  padding: 10px 0;
+}
+
+.section-title::after {
+  content: "";
+  display: block;
+  width: 90px;
+  height: 1px;
+  margin: 12px auto 0;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+
+@keyframes cyberDrift {
+  from { transform: translate(0, 0); }
+  to { transform: translate(120px, 120px); }
+}
+
+@media (max-width: 800px) {
+  body {
+    padding-top: 100px;
+    padding-left: 18px;
+    padding-right: 18px;
+    background-size: 34px 34px;
+  }
+
+  .section-title {
+    font-size: 1.45rem;
+    margin-top: 42px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding-top: 86px;
+  }
+
+  .fade-in {
+    animation-duration: 0.55s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body,
+  .app-main::before {
+    animation: none !important;
   }
 }
