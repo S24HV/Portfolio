@@ -10,74 +10,56 @@
 [![Redux Toolkit](https://img.shields.io/badge/Redux_Toolkit-2.5-764ABC?style=for-the-badge&logo=redux&logoColor=white)](https://redux-toolkit.js.org)
 [![Sass](https://img.shields.io/badge/Sass-1.83-CC6699?style=for-the-badge&logo=sass&logoColor=white)](https://sass-lang.com)
 
-[![Deploy](https://github.com/S24HV/Portfolio/actions/workflows/deploy.yml/badge.svg)](https://github.com/S24HV/Portfolio/actions)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-
 ### [→ Live demo](https://s24hv.github.io/Portfolio/)
 
-<img src="docs/screenshots/hero-dark.png" alt="S24HV portfolio — terminal hero section in dark theme" width="100%" />
+<img src="docs/screenshots/hero-dark.png" alt="Terminal hero section in dark theme" width="100%" />
 
 </div>
 
 ---
 
-## What it is
+## About
 
-A single-page portfolio with a hacker-terminal aesthetic. Instead of hardcoding a project list,
-the site pulls repositories, languages and READMEs straight from the GitHub REST API — so the
-content stays up to date without touching the code.
+Single-page portfolio of **Amir Sukhov** — frontend developer from Uzbekistan, moving into web application security.
+The page opens with a boot sequence, greets you with an interactive terminal, and pulls repositories,
+languages and READMEs straight from the GitHub API, so the content stays up to date without redeploys.
+
+## Features
 
 | | |
 |---|---|
-| **Boot sequence** | Multilingual `INITIALIZING ACCESS…` splash before the app fades in |
-| **Terminal hero** | Typewriter output of `whoami`, `status --check`, `hobbies --list` |
-| **Dark / light theme** | Redux Toolkit slice persisted to `localStorage` |
-| **Tech stack** | Language bars computed live from the languages of every public repo |
-| **Projects gate** | Cards unlock behind `$ ./access_repositories.sh`, with inline README rendering |
-| **Roadmap** | Timeline from frontend development towards cybersecurity |
-
----
+| **Boot sequence** | Animated terminal boot screen on first load |
+| **Terminal hero** | `whoami` / `status --check` / `focus --list` typed out live |
+| **Dark / light theme** | Redux Toolkit slice, saved in `localStorage` |
+| **EN / RU** | Full interface translation, language remembered between visits |
+| **Tech stack orbit** | Animated core with skills orbiting around it |
+| **Projects from GitHub** | Repositories, per-language filters, stars/forks/issues counters |
+| **Inline README viewer** | `LOAD README` renders any repo's README with `react-markdown` |
+| **Roadmap** | Learning timeline: frontend → scripting → pentesting → security |
 
 ## Screenshots
 
-<table>
-  <tr>
-    <td width="50%"><img src="docs/screenshots/hero-dark.png" alt="Hero and About sections in dark theme" /></td>
-    <td width="50%"><img src="docs/screenshots/hero-light.png" alt="Hero and About sections in light theme" /></td>
-  </tr>
-  <tr>
-    <td align="center"><b>Dark theme</b></td>
-    <td align="center"><b>Light theme</b></td>
-  </tr>
-  <tr>
-    <td><img src="docs/screenshots/techstack.png" alt="Tech stack bars generated from GitHub language statistics" /></td>
-    <td><img src="docs/screenshots/projects.png" alt="Project cards loaded from the GitHub API" /></td>
-  </tr>
-  <tr>
-    <td align="center"><b>Tech stack — generated from GitHub</b></td>
-    <td align="center"><b>Projects — loaded on demand</b></td>
-  </tr>
-</table>
+| Dark theme | Light theme |
+|---|---|
+| <img src="docs/screenshots/hero-dark.png" alt="Dark theme" width="100%" /> | <img src="docs/screenshots/hero-light.png" alt="Light theme" width="100%" /> |
 
-<p align="center">
-  <img src="docs/screenshots/roadmap.png" alt="Roadmap timeline from frontend development to cybersecurity" width="85%" />
-</p>
+| Tech stack | Projects |
+|---|---|
+| <img src="docs/screenshots/techstack.png" alt="Tech stack section" width="100%" /> | <img src="docs/screenshots/projects.png" alt="Projects section" width="100%" /> |
 
----
+<img src="docs/screenshots/roadmap.png" alt="Roadmap section" width="100%" />
 
 ## Tech stack
 
-| Layer | Choice |
+| Layer | Tools |
 |---|---|
-| UI | React 18 + TypeScript 5.6 |
+| UI | React 18.3, TypeScript 5.6 |
 | Build | Vite 6 |
-| State | Redux Toolkit + React Redux (theme slice) |
-| Styling | SCSS, CSS variables, Orbitron / Rajdhani / JetBrains Mono |
+| State | Redux Toolkit 2.5, React Redux 9 |
+| Styling | Sass / SCSS modules, custom CSS variables |
 | Data | axios → GitHub REST API |
 | Markdown | react-markdown + remark-gfm |
-| Deploy | GitHub Actions → GitHub Pages (`gh-pages` script as fallback) |
-
----
+| Deploy | gh-pages → GitHub Pages |
 
 ## Quick start
 
@@ -88,69 +70,43 @@ npm install
 npm run dev
 ```
 
-The dev server starts at **http://localhost:5173/Portfolio/** (the `/Portfolio/` base comes from
-`vite.config.ts` and matches the GitHub Pages path).
+Open http://localhost:5173/Portfolio/
 
 ### Scripts
 
 | Command | Description |
 |---|---|
-| `npm run dev` | Vite dev server with HMR |
-| `npm run build` | Type-check (`tsc -b`) and build to `dist/` |
+| `npm run dev` | Dev server with HMR |
+| `npm run build` | Type-check and build into `dist/` |
 | `npm run preview` | Serve the production build locally |
 | `npm run lint` | ESLint over the whole project |
-| `npm run deploy` | Manual publish of `dist/` to GitHub Pages |
-
-### Optional: GitHub token
-
-Unauthenticated GitHub API calls are limited to 60 requests/hour, and the site makes several per
-repository. To avoid rate limiting during development, create a `.env.local` with a read-only
-token:
-
-```bash
-VITE_GITHUB_TOKEN=ghp_your_read_only_token
-```
-
-Without it everything still works — you may just hit `403` responses after a few reloads.
-
----
+| `npm run deploy` | Build and publish `dist/` to the `gh-pages` branch |
 
 ## Project structure
 
 ```text
 src/
-├── assets/                 # avatar and SVG icons (github, mail, tg, sun, moon)
-├── components/             # one .tsx + one .scss per section
-│   ├── BootScreen.tsx      # access-granted splash
-│   ├── Header.tsx          # logo + theme toggle
-│   ├── Hero.tsx            # typewriter terminal
-│   ├── About.tsx           # bio and contacts
-│   ├── TechStack.tsx       # language bars from the GitHub API
-│   ├── Projects.tsx        # repo cards + README viewer
-│   ├── Roadmap.tsx         # learning timeline
-│   └── BottomBar.tsx       # floating contact bar
-├── services/github.ts      # repos, languages, README, OG preview helpers
-├── store/                  # Redux store + theme slice (localStorage persisted)
-├── App.tsx                 # section composition and projects gate
-└── global.styles.scss      # theme variables, grid background, animations
+├── components/      Header, BootScreen, Hero, About, TechStack, Projects, Roadmap, BottomBar
+├── services/        github.ts (GitHub API + cache), language.ts (i18n)
+├── store/           Redux Toolkit store and theme slice
+├── assets/
+├── global.styles.scss
+└── App.tsx
+docs/screenshots/    Images used in this README
 ```
-
----
 
 ## Deployment
 
-Every push to `main` triggers [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml):
-Node 20 → `npm ci` → `npm run build` → upload `dist/` → publish to GitHub Pages.
-Nothing else to configure beyond enabling Pages with the *GitHub Actions* source.
+```bash
+npm run deploy
+```
 
----
+Builds the project and pushes `dist/` to the `gh-pages` branch; GitHub Pages serves it at
+[s24hv.github.io/Portfolio](https://s24hv.github.io/Portfolio/).
+The base path is set in `vite.config.ts` (`base: "/Portfolio"`) — keep it in sync with the repository name.
 
 ## Contact
 
-<p align="left">
-  <a href="mailto:amirsuhov@gmail.com"><img src="https://img.shields.io/badge/Email-amirsuhov@gmail.com-EA4335?style=flat-square&logo=gmail&logoColor=white" alt="Email" /></a>
-  <a href="https://t.me/S_24_HV"><img src="https://img.shields.io/badge/Telegram-@S__24__HV-26A5E4?style=flat-square&logo=telegram&logoColor=white" alt="Telegram" /></a>
-  <a href="https://github.com/S24HV"><img src="https://img.shields.io/badge/GitHub-S24HV-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub" /></a>
-</p>
-
-Licensed under the [MIT License](LICENSE) — feel free to fork it as a base for your own portfolio.
+[![Email](https://img.shields.io/badge/amirsuhov@gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:amirsuhov@gmail.com)
+[![Telegram](https://img.shields.io/badge/@S__24__HV-26A5E4?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/S_24_HV)
+[![GitHub](https://img.shields.io/badge/S24HV-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/S24HV)
